@@ -9,8 +9,16 @@ const pesquisaEndpoint
 
         try{
              if(req.method === 'GET'){
+                if(req?.query?.id){
+                    const usuariosEncontrado = await UsuarioModel.findById(req?.query?.id);
+                    if(!usuariosEncontrado){
+                        return res.status(400).json({erro : 'usuario nao encontrado'});
+                    }
+                    usuariosEncontrado.senha = null;
+                    return res.status(200).json(usuariosEncontrado);
 
-                const {filtro} = req.query;
+                }else{
+                    const {filtro} = req.query;
                 if(!filtro || filtro.length < 2){
                     return res.status(400).json({erro : 'favor informar pelo menos 2 caracteres para busca'});
 
@@ -26,6 +34,8 @@ const pesquisaEndpoint
 
              }
              return res.status(405).json({erro : 'metodo informado nao e valido'});
+                    
+                }
 
         }catch(e){
             console.log(e)
