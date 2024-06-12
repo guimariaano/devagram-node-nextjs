@@ -6,6 +6,7 @@ import type { CadastroRequisicao } from "../../types/CadastroRequisicao";
 import { conectarMongoDB } from "../../middlewares/conectarMongoDB";  
 import { UsuarioModel } from "../../models/UsuarioModel"; 
 import {upload, uploadImagemCosmic} from "../../services/uploadImagemCosmic"; 
+import { politicaCORS } from "@/middlewares/politicaCORS";
 
 const handler = nc() 
   .use(upload.single("file")) 
@@ -72,4 +73,4 @@ export const config = {
   },
 };
 
-export default (conectarMongoDB(handler)); 
+export default politicaCORS(conectarMongoDB(handler)); 
