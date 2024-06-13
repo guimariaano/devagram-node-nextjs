@@ -1,5 +1,6 @@
 import { createBucketClient } from "@cosmicjs/sdk";
 import multer from "multer";
+import cosmicjs from "cosmicjs";
 
 const { BUCKET_SLUG, READ_KEY, WRITE_KEY } = process.env;
 
